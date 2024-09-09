@@ -37,19 +37,6 @@ dynamic handleHttpResponse(http.Response response) {
   }
 }
 
-T parseJsonToModel<T>(String responseBody, T Function(Map<String, dynamic>) fromJson, {bool isList = false}) {
-  final dynamic jsonData = jsonDecode(responseBody);
-
-  if (isList) {
-    // Handle JSON data as a list
-    final List<dynamic> jsonList = jsonData as List<dynamic>;
-    return jsonList.map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>)).toList() as T;
-  } else {
-    // Handle JSON data as a single object
-    final Map<String, dynamic> jsonMap = jsonData as Map<String, dynamic>;
-    return fromJson(jsonMap);
-  }
-}
 
 class FetchData<T> {
   final T data;
