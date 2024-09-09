@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:http/http.dart' as http;
 import '../models/api_error_model.dart';
 
@@ -40,3 +41,18 @@ T parseJsonToModel<T>(String responseBody, T Function(Map<String, dynamic>) from
   final jsonMap = jsonDecode(responseBody) as Map<String, dynamic>;
   return fromJson(jsonMap);
 }
+
+class FetchData<T> {
+  final T data;
+  final bool isLoading;
+  final ApiError? error;
+  final VoidCallback refetch;
+
+  FetchData({
+    required this.data,
+    required this.isLoading,
+    required this.error,
+    required this.refetch,
+  });
+}
+
