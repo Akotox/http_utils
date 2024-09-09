@@ -3,11 +3,11 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import '../models/api_error_model.dart';
 
-dynamic handleHttpResponse<T>(http.Response response, T Function(Map<String, dynamic>) fromJson, {bool isList = false}) {
+dynamic handleHttpResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
     case 201:
-      return parseJsonToModel<T>(response.body, fromJson, isList:isList);
+      return response.body;
     case 204:
       return ApiError(message: 'Content Deleted: The resource was successfully deleted');
     case 400:
