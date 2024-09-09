@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:http/http.dart' as http;
 import '../models/api_error_model.dart';
 
-dynamic handleHttpResponse<T>(http.Response response, T Function(Map<String, dynamic>) fromJson) {
+dynamic handleHttpResponse<T>(http.Response response, T Function(Map<String, dynamic>) fromJson, {bool isList = false}) {
   switch (response.statusCode) {
     case 200:
     case 201:
@@ -37,9 +37,18 @@ dynamic handleHttpResponse<T>(http.Response response, T Function(Map<String, dyn
   }
 }
 
-T parseJsonToModel<T>(String responseBody, T Function(Map<String, dynamic>) fromJson) {
-  final jsonMap = jsonDecode(responseBody) as Map<String, dynamic>;
-  return fromJson(jsonMap);
+T parseJsonToModel<T>(String responseBody, T Function(Map<String, dynamic>) fromJson, {bool isList = false}) {
+  final dynamic jsonData = jsonDecode(responseBody);
+
+  if (isList) {
+    // Handle JSON data as a list
+    final List<dynamic> jsonList = jsonData as List<dynamic>;
+    return jsonList.map((jsonItem) => fromJson(jsonItem as Map<String, dynamic>)).toList() as T;
+  } else {
+    // Handle JSON data as a single object
+    final Map<String, dynamic> jsonMap = jsonData as Map<String, dynamic>;
+    return fromJson(jsonMap);
+  }
 }
 
 class FetchData<T> {
