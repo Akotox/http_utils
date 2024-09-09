@@ -56,3 +56,16 @@ class FetchData<T> {
   });
 }
 
+class FetchListData<T> {
+  final List<T> data;
+  final bool isLoading;
+  final ApiError? error;
+  final VoidCallback refetch;
+
+  FetchListData({
+    required this.data,
+    required this.isLoading,
+    required this.error,
+    required this.refetch,
+  });
+}
