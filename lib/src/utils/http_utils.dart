@@ -7,7 +7,7 @@ dynamic handleHttpResponse<T>(http.Response response, T Function(Map<String, dyn
   switch (response.statusCode) {
     case 200:
     case 201:
-      return parseJsonToModel<T>(response.body, fromJson);
+      return parseJsonToModel<T>(response.body, fromJson, isList:isList);
     case 204:
       return ApiError(message: 'Content Deleted: The resource was successfully deleted');
     case 400:
