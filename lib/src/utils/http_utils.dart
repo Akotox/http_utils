@@ -66,6 +66,24 @@ class FetchListData<T> {
   });
 }
 
+class FetchListDataWithPagination<T> {
+  final List<T> data;
+  final bool isLoading;
+  final bool nextPage;
+  final bool prevPage;
+  final ApiError? error;
+  final VoidCallback refetch;
+
+  FetchListDataWithPagination({
+    required this.data,
+    required this.isLoading,
+    required this.error,
+    required this.refetch,
+    required this.nextPage,
+    required this.prevPage,
+  });
+}
+
 
   String handlerFirebaseAuthError(code) {
     switch (code) {
