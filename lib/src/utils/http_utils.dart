@@ -69,8 +69,8 @@ class FetchListData<T> {
 class FetchListDataWithPagination<T> {
   final List<T> data;
   final bool isLoading;
-  final bool nextPage;
-  final bool prevPage;
+  final VoidCallback nextPage;
+  final VoidCallback prevPage;
   final ApiError? error;
   final VoidCallback refetch;
 
